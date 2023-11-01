@@ -97,6 +97,11 @@ const (
 
 /*
 예약 키워드로 변수명, 상수명 사용 불가
-break default func interface select case defer go map struct chan else goto package switch const fallthrough if range type continue for import return var
+break default func interface select case defer go map struct chan else goto package switch const fallthrough
+if range type continue for import return var
 */
 ```
+
+<br>
+
+### 3.
