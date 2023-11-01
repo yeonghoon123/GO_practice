@@ -117,6 +117,7 @@
 
 1.  <b>Boolean type</b><br>
     bool
+
     <br>
 
 2.  <b>String type</b><br>
@@ -143,20 +144,23 @@
     */
     ```
 
-        <br>
+    <br>
 
 3.  <b>Integer type</b><br>
     int int8 int16 int32 int64<br>
     uint uint8 uint16 uint32 uint64 uintptr
+
     <br>
 
 4.  <b>Float type</b><br>
     float32 float64 complex64 complex128
+
     <br>
 
 5.  <b>Other type</b><br>
     byte: uint8과 동일하며 바이트 코드에 사용한다.<br>
     rune: int32과 동일하며 유니코드 코드포인트에 사용한다.
+
     <br>
 
     ```go
