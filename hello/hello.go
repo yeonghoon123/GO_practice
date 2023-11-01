@@ -23,16 +23,8 @@ func main() {
         log.Fatal(err)
     }
 
-
-
-    var str string = "ABC"
-    var bytes = []byte(str)
-    var str2 string = string(bytes)
-
-
     // If no error was returned, print the returned map of
     // messages to the console.
     fmt.Println(messages)
-    fmt.Println(str, bytes, str2)
 
 }
