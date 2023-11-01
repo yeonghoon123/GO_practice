@@ -1,5 +1,22 @@
 # GO lang practice
 
+### 목차
+
+1. [GO 공식 사이트](#go-공식-사이트)<br>
+2. [GO란?](#go란)<br>
+3. [GO 언어의 특성](#go-언어의-특성)<br>
+4. [GO 기초 문법](#go-기초-문법)<br>
+   4-1. [파일 생성 및 Hello World](#1-파일-생성-및-hello-world-출력)<br>
+   4-2. [변수와 상수](#2-변수와-상수)<br>
+   4-3. [데이터 타입](#3-go-데이터-타입)<br>
+   4-4. [연산자](#4-연산자)<br>
+
+### GO 공식 사이트
+
+링크 : <a href='https://go.dev/'>https://go.dev</a>
+
+<br>
+
 ### GO란?
 
 2007년 구글에서 개발한 언어이다.
@@ -16,12 +33,6 @@
 -   단순하고 간결한 프로그래밍 언어를 지향하였는데, Java의 절반에 해당하는 25개의 키워드만으로 프로그래밍이 가능하게 하였다.
     <br>
 -   Communicating Sqeuential Processes(CSP) 스타일의 Concureent 프로그래밍을 지원한다.
-
-<br>
-
-### GO 공식 사이트
-
-링크 : <a href='https://go.dev/'>https://go.dev</a>
 
 <br>
 
