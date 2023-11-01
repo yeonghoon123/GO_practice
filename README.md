@@ -15,7 +15,7 @@
     <br>
 -   단순하고 간결한 프로그래밍 언어를 지향하였는데, Java의 절반에 해당하는 25개의 키워드만으로 프로그래밍이 가능하게 하였다.
     <br>
--   Communicating Sqeuential Processes (CSP) 스타일의 Concureent 프로그래밍을 지원한다.
+-   Communicating Sqeuential Processes(CSP) 스타일의 Concureent 프로그래밍을 지원한다.
 
 <br>
 
@@ -28,3 +28,75 @@
 ### GO 기초 문법
 
 ---
+
+### 1. 파일 생성 및 Hello World 출력
+
+-   go 모듈 초기화
+
+```shell
+go mod init <모듈명>
+```
+
+<br>
+-   \*.go 형식의 파일 생성 후 코드 기입
+
+```go
+package main
+
+import "fmt"
+
+func main(){
+    fmt.Println("Hello World")
+}
+```
+
+<br>
+- 명령어 입력
+
+```shell
+go run .\*.go
+Hello World
+```
+
+<br>
+
+### 2. 변수와 상수
+
+```go
+// 변수
+var a int = 10 // 정수타입
+var b float32 = 11.2 // 실수타입
+var i, j, k int = 1, 3, 2 // 같은 타입 복수 result) i = 1, j = 3, k = 2
+
+// func 내에서 사용가능한 변수
+func test(){
+    q := 1 // var과 같은 Short Assignment Statement (:=) 'var q = 1' 와 같음
+}
+
+// 상수
+const c int = 10 // 정수타입
+const s = "HI" // 문자열 타입
+
+// 상수를 묶어서 선언 가능
+const (
+    korea = "Korea"
+    japan = "Japan"
+    usa = "USA"
+)
+
+/*
+상수값을 0 부터 순차적으로 부여할땐 iota라는 idntifier를 사용가능,
+이 경우 iota가 지정된 Apple은 0, 나머지상수들은 순서대로 1씩 증가
+*/
+
+const (
+    Apple = iota // 0
+    Grape        // 1
+    Orange       // 2
+)
+
+/*
+예약 키워드로 변수명, 상수명 사용 불가
+break default func interface select case defer go map struct chan else goto package switch const fallthrough if range type continue for import return var
+*/
+```

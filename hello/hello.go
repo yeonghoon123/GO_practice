@@ -22,7 +22,15 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
+
+    const (
+        Apple = iota // 0
+        Grape        // 1
+        Orange       // 2
+    )
     // If no error was returned, print the returned map of
     // messages to the console.
     fmt.Println(messages)
+    fmt.Println(Apple, Grape, Orange)
+
 }
