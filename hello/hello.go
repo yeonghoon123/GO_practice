@@ -23,14 +23,16 @@ func main() {
         log.Fatal(err)
     }
 
-    const (
-        Apple = iota // 0
-        Grape        // 1
-        Orange       // 2
-    )
+
+
+    var str string = "ABC"
+    var bytes = []byte(str)
+    var str2 string = string(bytes)
+
+
     // If no error was returned, print the returned map of
     // messages to the console.
     fmt.Println(messages)
-    fmt.Println(Apple, Grape, Orange)
+    fmt.Println(str, bytes, str2)
 
 }
