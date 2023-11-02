@@ -10,9 +10,11 @@
    4-2. [변수와 상수](#2-변수와-상수)<br>
    4-3. [데이터 타입](#3-go-데이터-타입)<br>
    4-4. [연산자](#4-연산자)<br>
-
-<br>
-<br>
+   4-5. [조건문](#5-조건문)<br>
+   4-6. [반복문](#6-반복문)<br>
+   <br>
+   <br>
+   <br>
 
 ### GO 공식 사이트
 
@@ -24,7 +26,10 @@
 
 2007년 구글에서 개발한 언어이다.
 
-<br>
+    <br>
+
+   <br>
+   <br>
 
 ### GO 언어의 특성
 
@@ -37,6 +42,8 @@
     <br>
 -   Communicating Sqeuential Processes(CSP) 스타일의 Concureent 프로그래밍을 지원한다.
 
+<br>
+<br>
 <br>
 
 ### GO 기초 문법
@@ -74,6 +81,8 @@
     Hello World
     ```
 
+<br>
+<br>
 <br>
 
 ### 2. 변수와 상수
@@ -118,13 +127,15 @@
         )
     ```
 
-    <br>
+<br>
 
 3.  <b>예약 키워드</b><br>
     예약 키워드는 변수, 상수명으로 사용 불가<br>
     > break default func interface select case defer go map<br> struct chan else goto package switch const
     > fallthrough if range type continue for import return var
 
+<br>
+<br>
 <br>
 
 ### 3. GO 데이터 타입
@@ -196,6 +207,8 @@
     ```
 
 <br>
+<br>
+<br>
 
 ### 4. 연산자
 
@@ -261,26 +274,41 @@
     ```
 
 <br>
+<br>
+<br>
 
 ### 5. 조건문
 
 1.  <b>if 문</b><br>
-    if 문은 조건에 맞으면 {} 불럭안의 내용을 실행한다. GO의 if 조건문은 괄호로 둘러싸지 않아도 된다.<br>
 
-    ```go
-    if k == 1 {
-    println("One")
-    } else if k == 2 {  //같은 라인
-    println("Two")
-    } else {   //같은 라인
-    println("Other")
-    }
-    ```
+    -   if 문은 조건에 맞으면 {} 불럭안의 내용을 실행한다. GO의 if 조건문은 괄호로 둘러싸지 않아도 된다.<br>
+
+        ```go
+        if k == 1 {
+        println("One")
+        } else if k == 2 {  //같은 라인
+        println("Two")
+        } else {   //같은 라인
+        println("Other")
+        }
+        ```
 
     <br>
 
 2.  <b>switch문</b><br>
-    여러 값을 비교 해야 하거나 다수의 조건식을 체크해야 하는 경우 switch문을 사용한다. switch문 뒤에 하나의 변수(Expression)을 지정하고, case문에 해당 변수가 가질 수 있는 값을 지정하여 조건식이 가능하다.<br>
+
+    여러 값을 비교 해야 하거나 다수의 조건식을 체크해야 하는 경우 switch문을 사용한다. switch문 뒤에 하나의 변수(Expression)을 지정하고, case문에 해당 변수가 가질 수 있는 값을 지정하여 조건식이 가능하다.
+
+    <br>
+
+    |                                      |                                                       |
+    | :----------------------------------- | :---------------------------------------------------- |
+    | switch 뒤에 expression이 없을수 있음 | switch 키워드 뒤에 expression이 없어도 사용 가능하다. |
+    | case문에 expression을 쓸수 있음      | case 문에 복잡한 expression을 가질 수 있다.           |
+    | No default fall through              | break를 사용하지 않아도 다음 case로 넘어가지 않는다.  |
+    | type switch                          | 변수의 type에 따라 case로 분기할 수 있다.             |
+
+    <br>
 
     ```go
     var name string
@@ -299,8 +327,121 @@
     println(name) // name = Paper Book
     ```
 
-    | -------- | ------- |
-    | switch 뒤에 expression이 없을수 있음|switch 키워드 뒤에 expression이 없어도 사용 가능하다. |
-    |case문에 expression을 쓸수 있음|case 문에 복잡한 expression을 가질 수 있다.|
-    | No default fall through | break를 사용하지 않아도 다음 case로 넘어가지 않는다. |
-    | type switch | 변수의 type에 따라 case로 분기할 수 있다. |
+    <br>
+
+    break문을 제거하고 싶은 경우 fallthrough를 사용하면 case가 끝난후 다음 case로 이동한다.<br>
+
+    ```go
+    switch val {
+    case 1:
+    fmt.Println("1 이하")
+    fallthrough
+    case 2:
+    fmt.Println("2 이하")
+    fallthrough
+    case 3:
+    fmt.Println("3 이하")
+    fallthrough
+    default:
+    fmt.Println("default 도달")
+    }
+    ```
+
+<br>
+<br>
+<br>
+
+### 6. 반복문
+
+1. <b>for문</b><br>
+   GO는 for문만 사용한다.
+
+    ```go
+    package main
+
+    func main() {
+        sum := 0
+        for i := 1; i <= 100; i++ {
+            sum += i
+        }
+        println(sum)
+    }
+    ```
+
+<br>
+
+2. <b>for문 조건식만 쓰는 루프</b><br>
+   for루프는 초기값과 증감식을 생략하고 사용할수 있다. (while문과 흡사함)
+
+    ```go
+    package main
+
+    func main() {
+        n := 1
+        for n < 100 {
+            n *= 2
+            //if n > 90 {
+            //   break
+            //}
+        }
+        println(n)
+    }
+    ```
+
+<br>
+
+3. <b>for문 - 무한루프</b><br>
+   초기값, 조건식, 증감을 모두 생략하면 무한루프이다.
+
+    ```go
+    package main
+
+    func main() {
+        for {
+            println("Infinite loop")
+        }
+    }
+    ```
+
+<br>
+
+4. <b>for range문</b><br>
+   컬렉션으로부터 한 요소씩 가져와 차례로 for 블럭의 문장들을 실행한다. (foreach와 흡사)
+
+    ```go
+    names := []string{"홍길동", "이순신", "강감찬"}
+
+    for index, name := range names {
+        println(index, name)
+    }
+    ```
+
+<br>
+
+5. <b>break, continue, goto문</b><br>
+   for 루프내에서 즉시 빠져나오고 싶을땐 break, 루프 중간의 나머지 문장들을 실행안하고 for루프의 시작으로 가려면 continue, 기타 임의의 문장으로 이동한는 경우엔 goto문을 사용하면 된다. goto문은 for루프와 상관없이 사용가능하다.
+
+    ```go
+    package main
+
+    func main() {
+        var a = 1
+        for a < 15 {
+            if a == 5 {
+                a += a
+                continue // for루프 시작으로
+            }
+            a++
+            if a > 10 {
+                break  //루프 빠져나옴
+            }
+        }
+        if a == 11 {
+            goto END //goto 사용예
+        }
+        println(a)
+
+    END:
+        println("End")
+    }
+    ```
