@@ -259,3 +259,48 @@
     var p = &k
     println(*p) // p가 가리키는 주소에 있는 실제 내용을 출력
     ```
+
+<br>
+
+### 5. 조건문
+
+1.  <b>if 문</b><br>
+    if 문은 조건에 맞으면 {} 불럭안의 내용을 실행한다. GO의 if 조건문은 괄호로 둘러싸지 않아도 된다.<br>
+
+    ```go
+    if k == 1 {
+    println("One")
+    } else if k == 2 {  //같은 라인
+    println("Two")
+    } else {   //같은 라인
+    println("Other")
+    }
+    ```
+
+    <br>
+
+2.  <b>switch문</b><br>
+    여러 값을 비교 해야 하거나 다수의 조건식을 체크해야 하는 경우 switch문을 사용한다. switch문 뒤에 하나의 변수(Expression)을 지정하고, case문에 해당 변수가 가질 수 있는 값을 지정하여 조건식이 가능하다.<br>
+
+    ```go
+    var name string
+    var category = 1
+
+    switch category {
+    case 1:
+        name = "Paper Book"
+    case 2:
+        name = "eBook"
+    case 3, 4:
+        name = "Blog"
+    default:
+        name = "Other"
+    }
+    println(name) // name = Paper Book
+    ```
+
+    | -------- | ------- |
+    | switch 뒤에 expression이 없을수 있음|switch 키워드 뒤에 expression이 없어도 사용 가능하다. |
+    |case문에 expression을 쓸수 있음|case 문에 복잡한 expression을 가질 수 있다.|
+    | No default fall through | break를 사용하지 않아도 다음 case로 넘어가지 않는다. |
+    | type switch | 변수의 type에 따라 case로 분기할 수 있다. |
