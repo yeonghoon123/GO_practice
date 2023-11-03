@@ -445,3 +445,107 @@
         println("End")
     }
     ```
+
+<br>
+<br>
+<br>
+
+### 7. 함수
+
+func로 정의하고 함수명 뒤에 괄호안에 함수 파라미터를 넣을 수 있고 파라미터명 뒤에는 type을 넣어줘야 된다.
+
+1. <b>Pass By Value</b><br>
+   변수의 값을 복사하여 함수에 전달되는 방식, 전달한 함수에서 값을 변경해도 본래의 값이 변경되지 않는다.
+
+    ```go
+    package main
+    func main() {
+        msg := "Hello"
+        say(msg)
+    }
+
+    func say(msg string) {
+        println(msg)
+    }
+    ```
+
+<br>
+
+2. <b>Pass By Reference</b><br>
+   변수앞에 &부호를 붙이면 변수의 주소를 표시하게 되고(포인터), \*변수명을 사용하면 본래의 값을 변경할 수 있다.
+
+    ```go
+    package main
+    func main() {
+        msg := "Hello"
+        say(&msg)
+        println(msg) //변경된 메시지 출력
+    }
+
+    func say(msg *string) {
+        println(*msg)
+        *msg = "Changed" //메시지 변경
+    }
+    ```
+
+<br>
+
+3. <b>Variadic Funtion(가변인자함수)</b><br>
+   다양한 숫자의 파라미터를 전달하고자 할 때 가변 파라미터를 나타내는 ...(마침표 3개)를 사용한다.
+
+    ```go
+    package main
+    func main() {
+        say("This", "is", "a", "book")
+        say("Hi")
+    }
+
+    func say(msg ...string) {
+        for _, s := range msg {
+            println(s)
+        }
+    }
+    ```
+
+<br>
+
+4. <b>함수 리턴값</b><br>
+   GO에서는 리턴값이 없거나, 하나 또는 여러개 일 수도 있다. 함수에서 리턴값이 있는 경우 func문의 (파라미터 괄호 다음) 마지막에 리턴값의 타입을 정의한다. 그리고 return 키워드를 사용한다.
+
+    ```go
+    package main
+
+    func main() {
+        total := sum(1, 7, 3, 5, 9)
+        count, total2 := sum(1, 7, 3, 5, 9)
+        println(total, count, total2)
+    }
+
+    func sum(nums ...int) int {
+        s := 0
+        for _, n := range nums {
+            s += n
+        }
+        return s
+    }
+
+    func sum2(nums ...int) (int, int) {
+        s := 0      // 합계
+        count := 0  // 요소 갯수
+        for _, n := range nums {
+            s += n
+            count++
+        }
+        return count, s
+    }
+
+    // return 결과 값을 직접 할당하고 있지만, 빈 return을 써주어야 한다. 안쓸경우 error발생
+    func sum3(nums ...int) (count int, total int) {
+        for _, n := range nums {
+            total += n
+        }
+        count = len(nums)
+        return
+    }
+
+    ```
