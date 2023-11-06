@@ -12,6 +12,11 @@
    4-4. [연산자](#4-연산자)<br>
    4-5. [조건문](#5-조건문)<br>
    4-6. [반복문](#6-반복문)<br>
+   4-7. [함수](#7-함수)<br>
+   4-8. [익명 함수](#8-익명-함수)<br>
+   4-9. [클로저](#9-클로저)<br>
+   4-10. [배열](#10-배열)<br>
+   4-11. [슬라이스](#11-슬라이스)<br>
    <br>
    <br>
    <br>
@@ -626,3 +631,174 @@ func로 정의하고 함수명 뒤에 괄호안에 함수 파라미터를 넣을
 <br>
 <br>
 <br>
+
+### 9. 클로저
+
+GO 언어에서 함수는 Closure로 사용될 수 있다. Clouser는 함수 바깥에 있는 변수를 참조하는 함수값을 일컫는데, 이때의 함수는 바깥의 변수를 마치 함수 안으로 끌어들인 듯이 그 변수를 읽거나 쓸 수 있다.
+
+```go
+package main
+
+func nextValue() func() int {
+    i := 0
+    return func() int {
+        i++
+        return i
+    }
+}
+
+func main() {
+    next := nextValue()
+
+    println(next())  // 1
+    println(next())  // 2
+    println(next())  // 3
+
+    anotherNext := nextValue()
+    println(anotherNext()) // 1 다시 시작
+    println(anotherNext()) // 2
+}
+```
+
+<br>
+<br>
+<br>
+
+### 10. 배열
+
+배열은 연속적인 메모리 공간에 동일한 타입의 데이타를 순서적으로 저장하는 자료구조이다.
+
+```go
+// 기본 배열
+package main
+
+func main() {
+    var a [3]int  //정수형 3개 요소를 갖는 배열 a 선언
+    a[0] = 1
+    a[1] = 2
+    a[2] = 3
+    println(a[1]) // 2 출력
+
+    // 배열에 초기화
+    var a1 = [3]int{1, 2, 3}
+    var a3 = [...]int{1, 2, 3} //배열크기 자동으로
+
+    // 다차원 배열
+    var multiArray [3][4][5]int  // 정의
+    multiArray[0][1][2] = 10     // 사용
+
+    // 다차원 배열의 초기화
+    var a = [2][3]int{
+            {1, 2, 3},
+            {4, 5, 6},  //끝에 콤마 추가
+        }
+    println(a[1][2])
+}
+```
+
+<br>
+<br>
+<br>
+
+### 11. 슬라이스
+
+슬라이스란, 배열과 흡사하지만 고정된 크기를 미리 지정하지 않고, 동적으로 변경 가능하며, 부분 배열을 발췌할 수 있다.
+
+1. <b>슬라이스 선언</b><br>
+
+    ```go
+    package main
+    import "fmt"
+
+    func main() {
+        // slice 선언 방법 1
+        var a []int        //슬라이스 변수 선언
+        a = []int{1, 2, 3} //슬라이스에 리터럴값 지정
+        a[1] = 10
+        fmt.Println(a)     // [1, 10, 3]출력
+
+        // slice 선언 방법 2
+        s := make([]int, 5, 10)
+        println(len(s), cap(s)) // len 5, cap 10
+
+        var s2 []int
+
+        if s2 == nil {
+            println("Nil Slice")
+        }
+
+        println(len(s2), cap(s2)) // 모두 0
+    }
+    ```
+
+<br>
+
+1. <b>부분 슬라이스</b><br>
+   슬라이스에서 일부를 발췌하여 부분 슬라이스를 만들 수 있다.
+
+    ```go
+    package main
+
+    import "fmt"
+
+    func main() {
+        s := []int{0,1,2,3,4,5}
+        s = s[2:5]
+        s = s[2:5]     // 2, 3, 4
+        s = s[1:]      // 3, 4
+        fmt.Println(s)
+    }
+    ```
+
+<br>
+
+2. <b>슬라이스 추가, 병합, 복사</b><br>
+   배열에선 고정된 크기 이상의 데이터를 추가 할 수 없지만 슬라이스는 가능하다. 추가는 append()를 사용한다, 복사는 copy()를 사용한다.
+
+    ```go
+
+    // 슬라이스 추가
+    func slice3(){
+        // 슬라이스 추가
+        s := []int{0, 1}
+
+        s = append(s, 2)
+
+        s = append(s, 3, 4, 5)
+
+        fmt.Println(s)
+
+        // 슬라이스 추가시 배열길이와, 용량 비교
+        // len=0, cap=3 인 슬라이스
+        sliceA := make([]int, 0, 3)
+
+        // 계속 한 요소씩 추가
+        for i := 1; i <= 15; i++ {
+            sliceA = append(sliceA, i)
+            // 슬라이스 길이와 용량 확인
+            fmt.Println(len(sliceA), cap(sliceA))
+        }
+
+        fmt.Println(sliceA) // 1 부터 15 까지 숫자 출력
+    }
+
+    // 슬라이스 병합
+    func slice4(){
+        sliceA := []int{1, 2, 3}
+        sliceB := []int{4, 5, 6}
+
+        sliceA = append(sliceA, sliceB...)
+        //sliceA = append(sliceA, 4, 5, 6)
+
+        fmt.Println(sliceA) // [1 2 3 4 5 6] 출력
+    }
+
+    // 슬라이스 복사
+    func slice5(){
+        source := []int{0, 1, 2}
+        target := make([]int, len(source), cap(source) *2)
+        copy(target, source)
+        fmt.Println(target)
+        println(len(target), cap(target)) // 3, 6 출력
+    }
+    ```
