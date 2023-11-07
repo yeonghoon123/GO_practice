@@ -16,7 +16,7 @@
    4-8. [익명 함수](#8-익명-함수)<br>
    4-9. [클로저](#9-클로저)<br>
    4-10. [배열](#10-배열)<br>
-   4-11. [슬라이스](#11-슬라이스)<br>
+   4-11. [Slice](#11-slice)<br>
    <br>
    <br>
    <br>
@@ -700,7 +700,7 @@ func main() {
 <br>
 <br>
 
-### 11. 슬라이스
+### 11. Slice
 
 슬라이스란, 배열과 흡사하지만 고정된 크기를 미리 지정하지 않고, 동적으로 변경 가능하며, 부분 배열을 발췌할 수 있다.
 
@@ -800,5 +800,153 @@ func main() {
         copy(target, source)
         fmt.Println(target)
         println(len(target), cap(target)) // 3, 6 출력
+    }
+    ```
+
+<br>
+<br>
+<br>
+
+### 12 Map
+
+Map은 키(Key)에 대응하는 값(value)을 신속히 찾는 해시테이블을 구현한 자료구조이다.
+
+1. <b>선언 방법</b><br>
+   "map[Key타입]Value타입" 과 같이 선언하거나 make()를 사용할 수 있고 리터럴을 사용할 수 있다.
+
+    ```go
+     // 1
+    var idMap map[int]string
+    idMap = make(map[int]string)
+
+    //2
+    idMap2 := map[string]string{
+    	"GOO": "GOOGLE",
+    	"MS": "MICROSOFT",
+    	"FB": "FACEBOOK",
+    }
+
+    println(idMap, idMap2)
+    ```
+
+<br>
+
+2. <b>Map 사용</b><br>
+   map이 make()함수에 의해 초기화 되었을때 아무데이터가 없는 상황이다. 데이터를 추가하기 위해선 "map변수[key] = value" 같이 할당하면 된다.
+
+    ```go
+    var m map[int]string
+
+    m = make(map[int]string)
+    //추가 혹은 갱신
+    m[901] = "Apple"
+    m[134] = "Grape"
+    m[777] = "Tomato"
+
+    // 키에 대한 값 읽기
+    str := m[134]
+    println(str)
+
+    noData := m[999] // 값이 없으면 nil 혹은 zero 리턴
+    println(noData)
+
+    // 삭제
+    delete(m, 777)
+    ```
+
+<br>
+
+3.  <b>Map 키 체크</b><br>
+    GO에선 map변수[key]를 읽기를 수행할 때 2개의 리턴값을 리턴한다. 첫번째는 value, 두번째는 키에 유무를 나타내는 bool값이다.
+
+    ```go
+    tickers := map[string]string{
+        "GOOG": "Google Inc",
+        "MSFT": "Microsoft",
+        "FB":   "FaceBook",
+        "AMZN": "Amazon",
+    }
+
+    // map 키 체크
+    val, exists := tickers["MSFT"]
+
+    if !exists {
+        println("No MSFT ticker")
+    }
+
+    println(val)
+    ```
+
+    <br>
+
+4.  <b>for루프를 사용하여 Map 열거</b><br>
+    Map의 모든 요소를 출력하기 위해 for range 루프를 사용할 수 있다. for range를 사용할 경우, key와 value를 리턴한다.
+
+    ```go
+    myMap := map[string]string{
+        "A": "Apple",
+        "B": "Banana",
+        "C": "Charlie",
+    }
+
+    // for range 문을 사용하여 모든 맵 요소 출력
+    // Map은 unordered 이므로 순서는 무작위
+    for key, val := range myMap {
+        println(key, val)
+    }
+    ```
+
+<br>
+<br>
+<br>
+
+### 13. 구조체
+
+-   구조체는 Custom Data Type을 표현하는데 사용된다. 구조체를 정의할땐 type문을 사용한다.<br>
+    구조체를 생성할땐 구조체명{}, new(), 생성자 함수를 통해 생성한다
+
+    ```go
+    package main
+
+    import(
+        "fmt"
+    )
+
+    type person struct {
+        name string
+        age int
+    }
+
+    func newPerson() *person {
+        p := person{}
+
+        return &p
+    }
+
+    // person객체 생성 방법
+    func main(){
+        // 방법1
+        p := person{}
+
+        //필드값 설정
+        p.name = "kyh"
+        p.age = 23
+
+
+        // 방법2
+        var p1 person
+        p1 = person{"kwb", 43}
+        p2 := person{"jws", 13}
+
+        // 방법3
+        p3 := new(person)
+        p3.name = "jbr"
+
+        // 방법4 (생성자 함수)
+        p4 := newPerson()
+        p4.name = "wow"
+        p4.age = 31
+
+        fmt.Println(p, p1, p2, p3, p4)
     }
     ```
